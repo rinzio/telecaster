@@ -15,7 +15,7 @@ export default function PresentationCard({
         <Image
           height={128}
           width={128}
-          src="https://picsum.photos/128"
+          src="https://picsum.photos/128" // TODO: Change this for the real image stored
           alt="Profile pic"
           className="mr-4 rounded-full"
         />
