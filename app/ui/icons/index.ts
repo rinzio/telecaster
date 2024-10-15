@@ -8,8 +8,9 @@ import HeartIcon from "./heart";
 import KidneysIcon from "./kidney";
 import LiverIcon from "./liver";
 import LungsIcon from "./lungs";
+import MindIcon from "./mind";
 import NoseIcon from "./nose";
 import StomachIcon from "./stomach";
 import ToothIcon from "./tooth";
 
-export { BoneIcon, BrainIcon, ChildIcon, DoctorIcon, EarIcon, EyeIcon, HeartIcon, KidneysIcon, LiverIcon, LungsIcon, NoseIcon, StomachIcon, ToothIcon };
+export { BoneIcon, BrainIcon, ChildIcon, DoctorIcon, EarIcon, EyeIcon, HeartIcon, KidneysIcon, LiverIcon, LungsIcon, NoseIcon, MindIcon, StomachIcon, ToothIcon };

@@ -2,6 +2,7 @@
 
 import {
   UserGroupIcon,
+  UserIcon,
   HomeIcon,
   DocumentDuplicateIcon,
 } from "@heroicons/react/24/outline";
@@ -20,6 +21,7 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: "Pacientes", href: "/dashboard/patients", icon: UserGroupIcon },
+  { name: "Perfil", href: "/dashboard/profile", icon: UserIcon },
 ];
 
 export default function NavLinks() {

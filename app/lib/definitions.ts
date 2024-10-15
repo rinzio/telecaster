@@ -122,10 +122,6 @@ export namespace Doctor {
     speciality: string;
     prof_id?: string;
     m_lastname?: string;
-    birthdate?: Date;
-    created_at: Date;
-    updated_at: Date;
-    is_active: boolean;
-    is_new: boolean;
+    birthdate?: Date | string;
   };
 }
