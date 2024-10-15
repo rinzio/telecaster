@@ -83,3 +83,49 @@ export namespace Patient {
     is_new: boolean;
   };
 }
+
+
+export namespace Doctor {
+  export type QueryParams = {
+    id?: string;
+    is_active?: boolean;
+    name?: string;
+    prof_id?: string;
+    p_lastname?: string;
+    email?: string; // TODO: Email validation here
+    genre?: string; // TODO: Single char validation
+  };
+
+  export type Payload = {
+    name: string;
+    p_lastname: string;
+    email: string; // TODO: Email validation here
+    prof_id: string;
+    m_lastname?: string;
+    birthdate?: Date;
+  };
+
+  export type Changeset = {
+    name?: string;
+    p_lastname?: string;
+    email?: string; // TODO: Email validation here
+    prof_id?: string;
+    m_lastname?: string;
+    birthdate?: Date;
+  };
+
+  export type Response = {
+    _id: string;
+    name: string;
+    email: string;
+    p_lastname: string;
+    speciality: string;
+    prof_id?: string;
+    m_lastname?: string;
+    birthdate?: Date;
+    created_at: Date;
+    updated_at: Date;
+    is_active: boolean;
+    is_new: boolean;
+  };
+}
