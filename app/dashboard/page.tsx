@@ -1,11 +1,18 @@
 import { Card } from '@/app/ui/dashboard/cards';
 import LatestPatients from '@/app/ui/dashboard/patients';
 import TopBar from '@/app/ui/dashboard/top-bar';
+import { redirect } from 'next/navigation';
+
+import { auth } from '@/auth';
+import Doctors from '../lib/http/doctor';
 
 export default async function Page() {
+  const session = await auth();
+  if (!session) redirect('/login');
+  const doctor = await Doctors.GET(session?.user?._id);
   return (
     <main>
-      <TopBar />
+      <TopBar doctor={doctor} />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Card title="Citas confirmadas" value={10} type="collected" />
         <Card title="Citas pendientes" value={15} type="pending" />

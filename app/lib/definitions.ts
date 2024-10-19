@@ -125,3 +125,11 @@ export namespace Doctor {
     birthdate?: Date | string;
   };
 }
+
+export namespace Auth {
+  export type Response = {
+    access_token: string;
+    token_type: string;
+    // Add refresh token login here
+  }
+}

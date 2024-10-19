@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { auth } from '@/auth';
 
 import InfoCard from '@/app/ui/profile/info-card';
 import Doctors from '@/app/lib/http/doctor';
@@ -9,14 +10,15 @@ import InfoDisplayBox from '@/app/ui/profile/info-display-box';
 import PresentationCard from '@/app/ui/profile/presentation-card';
 
 export default async function Page() {
-  const doctor = await Doctors.GET('670e05abb1f0c458222ae6e9');
+  const session = await auth();
+  const doctor = await Doctors.GET(session?.user?._id as never);
 
   return (
     <main>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
         <PresentationCard
-          title={`Dr. ${getFirstName(doctor.name)} ${doctor.p_lastname}`}
-          speciality={doctor.speciality}
+          title={`Dr. ${getFirstName(doctor.name || '')} ${doctor?.p_lastname}`}
+          speciality={doctor?.speciality}
         />
 
         <InfoCard title="Personal" type="personal">
@@ -38,7 +40,7 @@ export default async function Page() {
         <InfoCard title="Profesional" type="profesional">
           <InfoDisplayBox
             title="Especialidad"
-            value={getSpecialityProps(doctor.speciality).speciality}
+            value={getSpecialityProps(doctor.speciality || '').speciality}
           />
           <InfoDisplayBox title="Universidad" value={'UNAM'} />
           <InfoDisplayBox title="Número de cédula" value={doctor.prof_id} />
