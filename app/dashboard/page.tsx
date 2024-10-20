@@ -1,14 +1,12 @@
 import { Card } from '@/app/ui/dashboard/cards';
 import LatestPatients from '@/app/ui/dashboard/patients';
 import TopBar from '@/app/ui/dashboard/top-bar';
-import { redirect } from 'next/navigation';
 
 import { auth } from '@/auth';
 import Doctors from '../lib/http/doctor';
 
 export default async function Page() {
   const session = await auth();
-  if (!session) redirect('/login');
   const doctor = await Doctors.GET(session?.user?._id);
   return (
     <main>

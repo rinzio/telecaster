@@ -1,12 +1,12 @@
-import { Doctor } from "../definitions";
+import { Doctor } from '../definitions';
 
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = 'http://127.0.0.1:8000';
 
 const GET = async (id: string): Promise<Doctor.Response> => {
   const res = await fetch(`${BASE_URL}/doctors/${id}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await res.json();
@@ -15,20 +15,23 @@ const GET = async (id: string): Promise<Doctor.Response> => {
 
 const LIST = async (): Promise<Doctor.Response[]> => {
   const res = await fetch(`${BASE_URL}/doctors`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await res.json();
   return data;
 };
 
-const STATS = async (id: string): Promise<{total: number, masc: number, fem: number}> => {
-  const res = await fetch(`${BASE_URL}/doctors/${id}/patients/stats`, {
-    method: "GET",
+const STATS = async (
+  token: string
+): Promise<{ total: number; masc: number; fem: number }> => {
+  const res = await fetch(`${BASE_URL}/doctors/my/patients/stats`, {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   });
   const data = await res.json();
@@ -37,9 +40,9 @@ const STATS = async (id: string): Promise<{total: number, masc: number, fem: num
 
 const POST = async (body: Doctor.Payload): Promise<Doctor.Response> => {
   const res = await fetch(`${BASE_URL}/doctors`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   });
@@ -50,9 +53,9 @@ const POST = async (body: Doctor.Payload): Promise<Doctor.Response> => {
 const DELETE = async (id: string): Promise<Doctor.Response> => {
   // Queryparams here
   const res = await fetch(`${BASE_URL}/doctors/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
   const data = await res.json();
@@ -61,12 +64,12 @@ const DELETE = async (id: string): Promise<Doctor.Response> => {
 
 const PATCH = async (
   id: string,
-  body: Doctor.Changeset,
+  body: Doctor.Changeset
 ): Promise<Doctor.Response> => {
   const res = await fetch(`${BASE_URL}/doctors/${id}`, {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   });
@@ -80,7 +83,7 @@ const Doctors = {
   POST,
   PATCH,
   DELETE,
-  STATS
+  STATS,
 };
 
 export default Doctors;
