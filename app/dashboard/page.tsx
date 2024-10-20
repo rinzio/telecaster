@@ -2,12 +2,10 @@ import { Card } from '@/app/ui/dashboard/cards';
 import LatestPatients from '@/app/ui/dashboard/patients';
 import TopBar from '@/app/ui/dashboard/top-bar';
 
-import { auth } from '@/auth';
 import Doctors from '../lib/http/doctor';
 
 export default async function Page() {
-  const session = await auth();
-  const doctor = await Doctors.GET(session?.user?._id);
+  const doctor = await Doctors.My.self();
   return (
     <main>
       <TopBar doctor={doctor} />

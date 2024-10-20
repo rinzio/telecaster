@@ -42,7 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const { email, password } = await signInSchema.parseAsync(credentials);
         const token = (await Auth_.LOGIN({ email, password })).access_token;
 
-        user = await Auth_.ME(token);
+        user = await Auth_.ME();
         if (!user) {
           throw new Error('User not found.');
         }
