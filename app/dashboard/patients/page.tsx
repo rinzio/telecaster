@@ -1,7 +1,6 @@
 import { Card } from '@/app/ui/dashboard/cards';
 import Doctors from '@/app/lib/http/doctor';
 import TopBar from '@/app/ui/dashboard/top-bar';
-import { auth } from '@/auth';
 
 export default async function Page() {
   const { total, masc, fem } = await Doctors.My.Patients.stats();
