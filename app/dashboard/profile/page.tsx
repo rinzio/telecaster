@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { auth } from '@/auth';
 
 import InfoCard from '@/app/ui/profile/info-card';
 import Doctors from '@/app/lib/http/doctor';
@@ -10,8 +9,7 @@ import InfoDisplayBox from '@/app/ui/profile/info-display-box';
 import PresentationCard from '@/app/ui/profile/presentation-card';
 
 export default async function Page() {
-  const session = await auth();
-  const doctor = await Doctors.GET(session?.user?._id as never);
+  const doctor = await Doctors.My.self();
 
   return (
     <main>

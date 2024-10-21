@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import Auth_ from './app/lib/http/auth';
 
 import { object, string } from 'zod';
+import { HTTP } from './app/lib/http/axios';
 
 export const signInSchema = object({
   email: string({ required_error: 'Email is required' })
@@ -41,8 +42,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         let user = null;
         const { email, password } = await signInSchema.parseAsync(credentials);
         const token = (await Auth_.LOGIN({ email, password })).access_token;
+        HTTP.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        user = await Auth_.ME(token);
+        user = await Auth_.ME();
         if (!user) {
           throw new Error('User not found.');
         }

@@ -1,12 +1,13 @@
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import Image from "next/image";
-import { lusitana } from "@/app/ui/fonts";
-import Patients from "@/app/lib/http/patients";
-import { Patient } from "@/app/lib/definitions";
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
+import Image from 'next/image';
+import { lusitana } from '@/app/ui/fonts';
+import Patients from '@/app/lib/http/patients';
+import { Patient } from '@/app/lib/definitions';
+import Doctors from '@/app/lib/http/doctor';
 
 export default async function LatestPatients() {
-  const patients = await Patients.LIST();
+  const patients = await Doctors.My.Patients.get();
 
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -14,27 +15,26 @@ export default async function LatestPatients() {
         Pacientes recientes
       </h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
-
         <div className="bg-white px-6">
           {patients.map((patient: Patient.Response, i: number) => {
             return (
               <div
                 key={patient.email}
                 className={clsx(
-                  "flex flex-row items-center justify-between py-4",
+                  'flex flex-row items-center justify-between py-4',
                   {
-                    "border-t": i !== 0,
-                  },
+                    'border-t': i !== 0,
+                  }
                 )}
               >
                 <div className="flex items-center">
-                <Image
-                  src={"https://picsum.photos/32/32"}
-                  alt={`${patient.name} profile pic`}
-                  className="mr-4 rounded-full"
-                  width={32}
-                  height={32}
-                /> 
+                  <Image
+                    src={'https://picsum.photos/32/32'}
+                    alt={`${patient.name} profile pic`}
+                    className="mr-4 rounded-full"
+                    width={32}
+                    height={32}
+                  />
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">
                       {patient.p_lastname}

@@ -1,36 +1,33 @@
-import { Auth, Doctor } from "../definitions";
+import { Auth, Doctor } from '@/app/lib/definitions';
 
-const BASE_URL = "http://127.0.0.1:8000";
+import { HTTP } from './axios';
 
 // TODO: Validate email
-const LOGIN = async (data: {email: string, password: string}): Promise<Auth.Response> => {
-  const body = JSON.stringify({username: data.email, password: data.password});
-  const res = await fetch(`${BASE_URL}/auth/login`, {
-    method: "POST",
-    body,
-    headers: {
-      "Content-Type": "application/json"
-    }
+const LOGIN = async (data: {
+  email: string;
+  password: string;
+}): Promise<Auth.Response> => {
+  const response = HTTP.post('/auth/login', {
+    username: data.email,
+    password: data.password,
   });
-  const resp = await res.json();
-  return resp;
+  const body = (await response).data;
+
+  if (!response) {
+    throw new Error('Could not login');
+  }
+
+  return body;
 };
 
-const ME = async (token: string): Promise<Doctor.Response> => {
-    const res = await fetch(`${BASE_URL}/auth/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-    });
-    const resp = await res.json();
-    return resp;
-  };
-  
+const ME = async (): Promise<Doctor.Response> => {
+  const response = HTTP.get('/auth/me');
+  return (await response).data;
+};
 
 const Auth_ = {
-  ME, LOGIN
-}
+  LOGIN,
+  ME,
+};
 
 export default Auth_;

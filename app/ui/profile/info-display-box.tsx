@@ -14,13 +14,13 @@ export default function InfoDisplayBox({
       <div>
         <label
           htmlFor={title}
-          className={`${lusitana.className} truncate ml-2 mb`}
+          className={`${lusitana.className} truncate ml-3 mb`}
         >
           {title}
         </label>
         <p
           id={title}
-          className={`${lusitana.className} truncate rounded-xl bg-white px-2 py-4 text-center text-xl mt-1 mb-4`}
+          className={`${lusitana.className} truncate rounded-xl bg-white px-2 py-4 text-center text-xl m-3 mt-1`}
         >
           {value}
         </p>
