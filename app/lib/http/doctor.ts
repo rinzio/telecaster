@@ -1,5 +1,9 @@
-import { Doctor } from '../definitions';
+import { Doctor, Patient } from '@/app/lib/definitions';
+import { setToken } from '@/app/lib/utils';
+
 import { HTTP } from './axios';
+
+await setToken();
 
 const GET = async (id: string): Promise<Doctor.Response> => {
   const response = HTTP.get(`/doctors/${id}`);
@@ -34,7 +38,7 @@ const self = async (): Promise<Doctor.Response> => {
   return (await response).data;
 };
 
-const get = async (): Promise<Doctor.Response[]> => {
+const get = async (): Promise<Patient.Response[]> => {
   const response = HTTP.get('/doctors/my/patients');
   return (await response).data;
 };

@@ -1,4 +1,5 @@
-import { Auth, Doctor } from '../definitions';
+import { Auth, Doctor } from '@/app/lib/definitions';
+
 import { HTTP } from './axios';
 
 // TODO: Validate email
@@ -16,7 +17,6 @@ const LOGIN = async (data: {
     throw new Error('Could not login');
   }
 
-  HTTP.defaults.headers.common['Authorization'] = `Bearer ${body.access_token}`;
   return body;
 };
 
